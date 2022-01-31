@@ -1,0 +1,29 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+    id 'java'
+}
+
+sourceCompatibility = 16
+targetCompatibility = 16
+
+group 'me.youded'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group:  'org.ow2.asm', name: 'asm', version: '9.2'
+    implementation group:  'org.ow2.asm', name: 'asm-tree', version: '9.2'
+}
+
+jar{
+    manifest{
+        attributes("Agent-Class": "me.youded.LunarBetterHurtCam.Agent")
+        attributes("Premain-Class": "me.youded.LunarBetterHurtCam.Agent")
+        attributes("Can-Retransform-Classes": true)
+    }
+}
+
+build.dependsOn shadowJar
